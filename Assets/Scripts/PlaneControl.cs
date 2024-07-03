@@ -5,6 +5,7 @@ public class PlaneControl : MonoBehaviour
 {
     private IControllable _controllable;
     private PlaneInputs _planeInputs;
+    [SerializeField] private InputsVisualizer _visualizer;
 
     private void Awake()
     {
@@ -25,5 +26,10 @@ public class PlaneControl : MonoBehaviour
         var rotatonDirection = _planeInputs.Flight.Rotation.ReadValue<Vector2>();
         _controllable.Move(moveDirection);
         _controllable.Rotate(rotatonDirection);
+
+        if(_visualizer != null)
+        {
+            _visualizer.SetInputs(moveDirection, rotatonDirection);
+        }
     }
 }
